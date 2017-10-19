@@ -1,0 +1,1 @@
+atp-get update && apt-get install gcc && apt-get install git
