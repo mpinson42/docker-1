@@ -1,1 +1,1 @@
-docker pull wordpress && docker run --link spawning-pool --name=lair -d -p 8080:80 wordpress
+docker run --link spawning-pool:mysql --name=lair -d -p 8080:80 wordpress
