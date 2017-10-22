@@ -1,4 +1,4 @@
 FROM alpine
-RUN apt-get -y update
-RUN apt-get -y install vim
-RUN vim
+RUN apk update
+RUN apk add vim
+ENTRYPOINT vim
