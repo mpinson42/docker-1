@@ -2,6 +2,7 @@ FROM debian
 RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y git
 RUN apt-get install -y wget
+RUN apt-get install -y mysql-server mysql-client
 RUN mkdir $HOME/local
 WORKDIR $HOME/local 
 RUN wget https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
@@ -16,4 +17,7 @@ RUN go get -u github.com/gogits/gogs
 WORKDIR $GOPATH/src/github.com/gogits/gogs
 RUN go build
 
-ENTRYPOINT ./gogs web
+RUN /etc/init.d/mysql start
+RUN mysql -e "CREATE DATABASE menagerie;"
+
+ENTRYPOINT /etc/init.d/mysql start && ./gogs web
